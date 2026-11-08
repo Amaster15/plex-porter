@@ -119,7 +119,10 @@ Windows:
 Ubuntu 22.04:
 
 ```bash
-sudo apt install python3-pip python3-tk libpython3.10 binutils
+sudo apt install python3-pip python3-venv python3-tk libpython3.10 binutils
+/usr/bin/python3 -m venv build/venv
+source build/venv/bin/activate
+python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install . pyinstaller
 python3 scripts/collect_licenses.py
 python3 -m PyInstaller --noconfirm --clean --onedir --add-data "$PWD/build/licenses:licenses" --name PlexPorter --distpath build/linux-dist --workpath build/linux-freeze --specpath build run.py
