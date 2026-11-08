@@ -35,11 +35,13 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y python3-pip python3-tk libpython3.10 binutils
-      - run: python3 -m pip install . pyinstaller
-      - run: python3 scripts/collect_licenses.py
-      - run: python3 -m PyInstaller --noconfirm --clean --onedir --add-data "$PWD/build/licenses:licenses" --name PlexPorter --distpath build/linux-dist --workpath build/linux-freeze --specpath build run.py
-      - run: python3 scripts/build_deb.py build/linux-dist/PlexPorter
+      - run: sudo apt-get update && sudo apt-get install -y python3-pip python3-venv python3-tk libpython3.10 binutils
+      - run: /usr/bin/python3 -m venv build/venv
+      - run: build/venv/bin/python -m pip install --upgrade pip setuptools wheel
+      - run: build/venv/bin/python -m pip install . pyinstaller
+      - run: build/venv/bin/python scripts/collect_licenses.py
+      - run: build/venv/bin/python -m PyInstaller --noconfirm --clean --onedir --add-data "$PWD/build/licenses:licenses" --name PlexPorter --distpath build/linux-dist --workpath build/linux-freeze --specpath build run.py
+      - run: build/venv/bin/python scripts/build_deb.py build/linux-dist/PlexPorter
       - run: dpkg-deb --info dist/plex-porter_0.5.0_amd64.deb
       - uses: actions/upload-artifact@v4
         with:
