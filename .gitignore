@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+*.spec
+*.zip
+*.db
+*.db-*
+Preferences.xml
+*.registry.json
+
+# Local diagnostics and credentials
+*.log
+.env
+.env.*
+*.p12
+*.pem
+*.key
+*Support-*.txt

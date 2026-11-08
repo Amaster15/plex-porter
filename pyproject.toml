@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plex-porter"
+version = "0.5.0"
+description = "Portable Plex library backups and Windows/Linux migration"
+requires-python = ">=3.10"
+dependencies = ["psutil>=6,<8", "certifi>=2025.1.31"]
+license = "MIT"
+
+[project.scripts]
+plex-porter = "plex_porter.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["plex_porter*"]
